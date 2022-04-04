@@ -14,12 +14,14 @@ import utils.Pokimon;
 
 public class Crear {
 	private JFrame frame;
+	private JTextField txtNum;
 	private JTextField txtNom;
 	private JTextField txtTipo;
 	private JTextField txtAltura;
 	private JTextField txtPeso;
 	private JTextField txtCategoria;
 	private JTextField txtSkill;
+	private JLabel lblNum;
 	private JLabel lblNewPkmn;
 	private JLabel lblCrNom;
 	private JLabel lblCrTipo;
@@ -69,66 +71,75 @@ public class Crear {
 		frame.getContentPane().add(lblNewPkmn);
 
 		lblCrNom = new JLabel("Nombre:");
-		lblCrNom.setBounds(10, 55, 73, 13);
+		lblCrNom.setBounds(10, 119, 73, 13);
 		frame.getContentPane().add(lblCrNom);
 
 		lblCrTipo = new JLabel("Tipo:");
-		lblCrTipo.setBounds(10, 78, 73, 13);
+		lblCrTipo.setBounds(10, 148, 73, 13);
 		frame.getContentPane().add(lblCrTipo);
 
 		lblCrAltura = new JLabel("Altura:");
-		lblCrAltura.setBounds(10, 101, 73, 13);
+		lblCrAltura.setBounds(10, 177, 73, 13);
 		frame.getContentPane().add(lblCrAltura);
 
 		lblCrPeso = new JLabel("Peso:");
-		lblCrPeso.setBounds(10, 124, 85, 13);
+		lblCrPeso.setBounds(10, 206, 85, 13);
 		frame.getContentPane().add(lblCrPeso);
 
 		lblCrCategoria = new JLabel("Categoria:");
-		lblCrCategoria.setBounds(10, 147, 85, 13);
+		lblCrCategoria.setBounds(10, 235, 85, 13);
 		frame.getContentPane().add(lblCrCategoria);
 
 		lblCrSkill = new JLabel("Habilidad:");
-		lblCrSkill.setBounds(10, 168, 85, 13);
+		lblCrSkill.setBounds(10, 264, 85, 13);
 		frame.getContentPane().add(lblCrSkill);
 
 		txtNom = new JTextField();
-		txtNom.setBounds(109, 52, 96, 19);
+		txtNom.setBounds(368, 116, 96, 19);
 		frame.getContentPane().add(txtNom);
 		txtNom.setColumns(10);
 
 		txtTipo = new JTextField();
-		txtTipo.setBounds(109, 75, 96, 19);
+		txtTipo.setBounds(368, 145, 96, 19);
 		frame.getContentPane().add(txtTipo);
 		txtTipo.setColumns(10);
 
 		txtAltura = new JTextField();
-		txtAltura.setBounds(109, 98, 96, 19);
+		txtAltura.setBounds(368, 174, 96, 19);
 		frame.getContentPane().add(txtAltura);
 		txtAltura.setColumns(10);
 
 		txtPeso = new JTextField();
-		txtPeso.setBounds(109, 121, 96, 19);
+		txtPeso.setBounds(368, 203, 96, 19);
 		frame.getContentPane().add(txtPeso);
 		txtPeso.setColumns(10);
 
 		txtCategoria = new JTextField();
-		txtCategoria.setBounds(109, 144, 96, 19);
+		txtCategoria.setBounds(368, 232, 96, 19);
 		frame.getContentPane().add(txtCategoria);
 		txtCategoria.setColumns(10);
 
 		txtSkill = new JTextField();
-		txtSkill.setBounds(109, 165, 96, 19);
+		txtSkill.setBounds(368, 261, 96, 19);
 		frame.getContentPane().add(txtSkill);
 		txtSkill.setColumns(10);
 
 		btnCrear = new JButton("Crear");
-		btnCrear.setBounds(250, 74, 96, 21);
+		btnCrear.setBounds(132, 326, 96, 21);
 		frame.getContentPane().add(btnCrear);
 
 		btnCancel = new JButton("Cancelar");
-		btnCancel.setBounds(250, 143, 96, 21);
+		btnCancel.setBounds(329, 326, 96, 21);
 		frame.getContentPane().add(btnCancel);
+		
+		lblNum = new JLabel("Numero:");
+		lblNum.setBounds(10, 96, 45, 13);
+		frame.getContentPane().add(lblNum);
+		
+		txtNum = new JTextField();
+		txtNum.setBounds(368, 87, 96, 19);
+		frame.getContentPane().add(txtNum);
+		txtNum.setColumns(10);
 	}
 
 	private void setUIBehaviour() {
@@ -163,6 +174,8 @@ public class Crear {
 	}
 
 	public void crearPokemon() {
+		String numero = txtNum.getText();
+		int numPkmn = Integer.parseInt(numero);
 		String nombrePkmn = txtNom.getText();
 		String tipoPkmn = txtTipo.getText();
 		String alturo = txtAltura.getText();
@@ -171,7 +184,14 @@ public class Crear {
 		double pesoPkmn = Double.parseDouble(pesito);
 		String categoria = txtCategoria.getText();
 		String habilidad = txtSkill.getText();
-
-		utils.Almacen.pokemones.add(new Pokimon(nombrePkmn, tipoPkmn, alturaPkmn, pesoPkmn, categoria, habilidad));
+		for(int i = 0; i < utils.Almacen.pokemones.size(); i++) {
+			if(!(utils.Almacen.pokemones.get(i).getNumero() == numPkmn)) {
+				Pokimon a = new Pokimon(numPkmn, nombrePkmn, tipoPkmn, alturaPkmn, pesoPkmn, categoria, habilidad);
+				utils.Almacen.pokemones.add(a);
+			} else {
+				JOptionPane.showMessageDialog(btnCrear, "Ya existe un pokemon con ese numero.");
+			}
+		}
+		
 	}
 }

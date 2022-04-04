@@ -10,8 +10,8 @@ public class MainApp {
 //		// TODO Auto-generated method stub
 		try {
 			utils.Almacen.cuentas.add(new Usuarios("Usuario1", "1234"));
-			utils.Almacen.pokemones.add(new Pokimon("Charmander", "Fuego", 0.6, 8.5, "Lagartija", "Mar de llamas."));
-			utils.Almacen.pokemones.add(new Pokimon("Bulbasaur", "Planta", 0.7, 6.9, "Semilla", "Espesura"));
+			utils.Almacen.pokemones.add(new Pokimon(1, "Charmander", "Fuego", 0.6, 8.5, "Lagartija", "Mar de llamas."));
+			utils.Almacen.pokemones.add(new Pokimon(2, "Bulbasaur", "Planta", 0.7, 6.9, "Semilla", "Espesura"));
 		} catch (Exception e) {
 			System.out.println("No se pudieron crear los elementos.");
 		}

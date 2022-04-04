@@ -210,11 +210,12 @@ public class PokedexView {
 				try {
 					while (contadorPkmn > 0) {
 						contadorPkmn--;
-					setElemsPkmn();
-					}	if (contadorPkmn == 0) {
+						setElemsPkmn();
+					}
+					if (contadorPkmn == 0) {
 						JOptionPane.showMessageDialog(btnAtras, "No hay más pokemones por debajo.");
 					}
-					
+
 				} catch (Exception r) {
 
 				}
@@ -227,7 +228,8 @@ public class PokedexView {
 					while (contadorPkmn <= utils.Almacen.pokemones.size()) {
 						contadorPkmn++;
 						setElemsPkmn();
-					} if (contadorPkmn == utils.Almacen.pokemones.size()) {
+					}
+					if (contadorPkmn + 1 == utils.Almacen.pokemones.size()) {
 						contadorPkmn = 1;
 					}
 				} catch (Exception ef) {
@@ -239,7 +241,7 @@ public class PokedexView {
 	}
 
 	public void setElemsPkmn() {
-		txtNum.setText(contadorPkmn + "");
+		txtNum.setText(utils.Almacen.pokemones.get(contadorPkmn - 1).getNumero() + "");
 		txtNom.setText(utils.Almacen.pokemones.get(contadorPkmn - 1).getNombre());
 		txtAltura.setText(utils.Almacen.pokemones.get(contadorPkmn - 1).getAltura() + "");
 		txtPeso.setText(utils.Almacen.pokemones.get(contadorPkmn - 1).getPeso() + "");
@@ -249,19 +251,23 @@ public class PokedexView {
 	}
 
 	public void cambiarPkmn() {
-		String nombrePkmn = txtNom.getText();
-		String tipoPkmn = txtType.getText();
-		String alturo = txtAltura.getText();
-		String pesito = txtPeso.getText();
-		double alturaPkmn = Double.parseDouble(alturo);
-		double pesoPkmn = Double.parseDouble(pesito);
-		String categoria = txtCategoria.getText();
-		String habilidad = txtSkill.getText();
-		utils.Almacen.pokemones.get(contadorPkmn - 1).setNombre(nombrePkmn);
-		utils.Almacen.pokemones.get(contadorPkmn - 1).setTipo(tipoPkmn);
-		utils.Almacen.pokemones.get(contadorPkmn - 1).setAltura(alturaPkmn);
-		utils.Almacen.pokemones.get(contadorPkmn - 1).setPeso(pesoPkmn);
-		utils.Almacen.pokemones.get(contadorPkmn - 1).setCategoria(categoria);
-		utils.Almacen.pokemones.get(contadorPkmn - 1).setHabilidad(habilidad);
+		try {
+			String nombrePkmn = txtNom.getText();
+			String tipoPkmn = txtType.getText();
+			String alturo = txtAltura.getText();
+			String pesito = txtPeso.getText();
+			double alturaPkmn = Double.parseDouble(alturo);
+			double pesoPkmn = Double.parseDouble(pesito);
+			String categoria = txtCategoria.getText();
+			String habilidad = txtSkill.getText();
+			utils.Almacen.pokemones.get(contadorPkmn - 1).setNombre(nombrePkmn);
+			utils.Almacen.pokemones.get(contadorPkmn - 1).setTipo(tipoPkmn);
+			utils.Almacen.pokemones.get(contadorPkmn - 1).setAltura(alturaPkmn);
+			utils.Almacen.pokemones.get(contadorPkmn - 1).setPeso(pesoPkmn);
+			utils.Almacen.pokemones.get(contadorPkmn - 1).setCategoria(categoria);
+			utils.Almacen.pokemones.get(contadorPkmn - 1).setHabilidad(habilidad);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(btnPkUpd, "No has cambiado nada o algo ha ido mal.");
+		}
 	}
 }

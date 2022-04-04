@@ -145,8 +145,6 @@ public class RegisterView {
 	public void registro() {
 		if ((txtFUser.getText() != null) && (passwordField.getText() != null) && (passwordConfirm.getText() != null)
 				&& passwordField.getText().equals(passwordConfirm.getText())) {
-			new LoginView();
-			frame.dispose();
 			registrar();
 		} else {
 			JOptionPane.showMessageDialog(btnCrear, "Comprueba que los elementos son correctos.");
@@ -161,6 +159,16 @@ public class RegisterView {
 		@SuppressWarnings("deprecation")
 		String userPassword = passwordField.getText();
 		Usuarios usuarioActual = new Usuarios(nombreUsuario, userPassword);
-		utils.Almacen.cuentas.add(usuarioActual);
+		for(int i = 0; i < utils.Almacen.cuentas.size(); i++) {
+			if(utils.Almacen.cuentas.get(i).getUsername() == nombreUsuario || utils.Almacen.cuentas.get(i).getPassword() == userPassword) {
+				JOptionPane.showMessageDialog(btnCrear, "Ya existe ese usuario.");
+			} else {
+				utils.Almacen.cuentas.add(usuarioActual);
+				new LoginView();
+				frame.dispose();
+			}
+		}
+		
 	}
+	
 }

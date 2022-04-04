@@ -9,10 +9,10 @@ public class Pokimon {
 	public String categoria;
 	public String habilidad;
 
-	public Pokimon(String nombre, String tipo, double altura, double peso, String categoria,
+	public Pokimon(int numero, String nombre, String tipo, double altura, double peso, String categoria,
 			String habilidad) {
 		super();
-		numero = utils.Almacen.pokemones.size() + 1;
+		this.numero = numero;
 		this.nombre = nombre;
 		this.tipo = tipo;
 		this.altura = altura;
